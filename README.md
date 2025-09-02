@@ -5,14 +5,14 @@ application incorporated with a Redis cache and PostgreSQL database
 within Docker containers. We learnt the process of using Docker Compose for
 orchestrating multi-container setups.
 
-⚙️ **Execution Steps**
+**Execution Steps**
 
 ### 1. Installing Docker Desktop
 
 **macOS** - Downloaded Docker Desktop for Mac by selecting the correct chip:
 Apple Silicon. 
 
-✅ Verifying my Installation:
+Verifying my Installation:
 
 ``` bash
 docker -v
@@ -157,7 +157,7 @@ Desktop on a local machine. - Gained practical experience in running
 PostgreSQL and Redis containers. - Learned to structure a simple Python
 Flask app and containerize it using Docker. - Explored how to
 orchestrate multiple services using Docker Compose. - Practiced
-real-world debugging and issue logging via GitHub. - Improved
+real-world issue logging via GitHub. - Improved
 understanding of container networking and service dependencies. -
 Experienced and observed the flow of installing, building, deploying, testing, 
 and documenting a containerized application.

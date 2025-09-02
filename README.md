@@ -1,88 +1,59 @@
-# Docker-Based Flask Web App with Redis & PostgreSQL
+# Installing a Docker and Building a Micro-Container Service
 
 This hands-on project focuses on deploying a Python Flask web
-application integrated with a Redis cache and PostgreSQL database, all
-within Docker containers. You'll also learn to use Docker Compose for
-orchestrating multi-container setups and practice pushing your project
-and issues to GitHub.
-
-📚 **Learning Goals**
-
--   Understand the fundamentals of working with containerized
-    environments.
--   Gain hands-on experience in setting up and configuring services
-    locally or in the cloud.
--   Learn how to connect and orchestrate multiple system components.
--   Develop skills in testing, monitoring, and documenting deployed
-    applications.
-
-🛠️ **What You'll Do** - Install and verify Docker Desktop - Run a
-PostgreSQL container - Set up a Flask app with Redis cache - Build and
-connect services using Docker Compose - Test the app in your browser and
-take screenshots - Push the project to GitHub - Create GitHub Issues for
-errors encountered during the hands-on
-
-> **Note:** Some errors are intentionally included in the code. Log them
-> under GitHub Issues.
-
-🧑‍💻 **Prerequisites** - Docker Desktop installed and verified - Code
-editor (e.g., VS Code) - Git and GitHub account - Internet connection
+application incorporated with a Redis cache and PostgreSQL database
+within Docker containers. We learnt the process of using Docker Compose for
+orchestrating multi-container setups.
 
 ⚙️ **Execution Steps**
 
-### 1️⃣ Install Docker Desktop
+### 1. Installing Docker Desktop
 
-**Windows** - Download Docker Desktop for Windows. - Run
-`Docker Desktop Installer.exe` with default settings. - Start Docker
-from the Start Menu. - Enable WSL 2 if prompted, then restart your
-system.
+**macOS** - Downloaded Docker Desktop for Mac by selecting the correct chip:
+Apple Silicon. 
 
-**macOS** - Download Docker Desktop for Mac (choose the correct chip:
-Apple Silicon or Intel). - Open the `.dmg` file and drag `Docker.app`
-into Applications. - Launch Docker and follow any security prompts.
-
-✅ Verify Installation:
+✅ Verifying my Installation:
 
 ``` bash
 docker -v
 ```
 
-### 2️⃣ PostgreSQL Setup with Docker
+### 2. PostgreSQL Setup with Docker
 
-a.  Pull the PostgreSQL Image:
+a.  Pulled the PostgreSQL Image:
 
 ``` bash
 docker pull postgres
 ```
 
-b.  Start a PostgreSQL Instance:
+b.  Created and Started a PostgreSQL Instance:
 
 ``` bash
 docker run -d -p 5432:5432 --name postgres1 -e POSTGRES_PASSWORD=pass12345 postgres
 ```
 
-c.  Access the Container:
+c.  Opened a Terminal to the Container:
 
 ``` bash
 docker exec -it postgres1 bash
 ```
 
-d.  Connect to PostgreSQL:
+d.  Interacted with PostgreSQL using psql:
 
 ``` bash
 psql -d postgres -U postgres
 ```
 
-### 3️⃣ Build a Flask + Redis App using Docker Compose
+### 3. Build a Python Web App using Docker Compose in VSCode
 
-a.  Create `requirements.txt`
+a.  Defined application dependencies in `requirements.txt`
 
 ``` txt
 flask
 redis
 ```
 
-b.  Create `app.py`
+b.  Defining application in `app.py`
 
 ``` python
 import time
@@ -106,10 +77,10 @@ def get_hit_count():
 @app.route('/')
 def hello():
     count = get_hit_count()
-    return f'Hello World! I have been seen {count} times.\n'
+    return f'Hello World! I have been seen {count} times.\n'.format(count)
 ```
 
-c.  Create a `Dockerfile`
+c.  Created a `Dockerfile` to conatainerize the application
 
 ``` dockerfile
 FROM python:3.7-alpine
@@ -124,7 +95,7 @@ COPY . .
 CMD ["flask", "run"]
 ```
 
-d.  Create `compose.yaml`
+d.  Defining services in `compose.yaml` file
 
 ``` yaml
 version: "3.9"
@@ -139,64 +110,57 @@ services:
     image: "redis:alpine"
 ```
 
-e.  Build and Run the Application:
+e.  Building and Running the Application:
 
 ``` bash
 docker compose up
 ```
 
-f.  Test in Browser:\
-    Open your browser and go to:\
+f.  Tested in Chrome Browser:\
+    by pasting the below mentioned URL:\
     <http://localhost:8000>
 
-Take screenshots of: - The running application output - Docker Desktop
-showing running containers
+Screenshots of the whole assignment including that of Docker Desktop is documented
+in **Screenshots** file.
 
-### 📤 Push to GitHub
+### Push to GitHub
 
-Initialize a Git repository:
+Initialized a Git repository:
 
 ``` bash
 git init
 ```
 
-Add and commit files:
+Adding and committing files:
 
 ``` bash
 git add .
-git commit -m "Initial commit - Docker Flask App"
+git commit -m "Initial commit - Docker based Python Web App"
 ```
 
-Push to GitHub:
+Pushed to GitHub:
 
 ``` bash
-git remote add origin <your-repo-URL>
+git remote add origin https://github.com/sbal2911/Docker_and_Multi-Container_Microservice.git
 git push -u origin main
 ```
 
-### ❗ Log Issues in GitHub
+### ❗ Logged Issues in GitHub
 
-Some errors are purposely introduced. You should: - Identify and
-document the issues - Create entries under the "Issues" tab in your
-GitHub repo
-
-Include: - Error message - Screenshot (if applicable) - How you tried to
-resolve it
+Some issues were observed during the code which were fixed by minor tweaks in code indentation.
+Screenshots of it are present in the Screenshot file.
 
 ------------------------------------------------------------------------
 
-🎯 **What I Learned** - Successfully installed and verified Docker
+**What I Learned** - Successfully installed and verified Docker
 Desktop on a local machine. - Gained practical experience in running
 PostgreSQL and Redis containers. - Learned to structure a simple Python
 Flask app and containerize it using Docker. - Explored how to
 orchestrate multiple services using Docker Compose. - Practiced
 real-world debugging and issue logging via GitHub. - Improved
 understanding of container networking and service dependencies. -
-Experienced the complete flow of deploying, testing, and documenting a
-containerized application.
+Experienced and observed the flow of installing, building, deploying, testing, 
+and documenting a containerized application.
 
-✅ **Final Notes** - Always follow submission guidelines and
-deadlines. - Reach out if you face any technical issues---we're here to
-help!
+------------------------------------------------------------------------
 
-🚀 Happy Coding!
